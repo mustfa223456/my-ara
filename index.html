@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustafa Al-Kreiti Store</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f4;
+            color: #555;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #8e44ad; /* لون متوهج */
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(142, 68, 173, 0.4);
+            animation: glow 1.5s ease-in-out infinite alternate; /* تأثير توهج */
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #8e44ad, 0 0 10px #8e44ad, 0 0 15px #8e44ad;
+            }
+            100% {
+                text-shadow: 0 0 20px #8e44ad, 0 0 30px #8e44ad, 0 0 40px #8e44ad;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover .card-title {
+            animation: rainbowGlow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes rainbowGlow {
+            0% { color: #FF0000; }
+            14% { color: #FF7F00; }
+            28% { color: #FFFF00; }
+            42% { color: #00FF00; }
+            57% { color: #0000FF; }
+            71% { color: #4B0082; }
+            85% { color: #9400D3; }
+            100% { color: #FF0000; }
+        }
+
+        .card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .actions button {
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .actions button:hover {
+            background: #3498db;
+        }
+
+        .total {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 20px 0;
+            color: #2980b9;
+        }
+
+        .checkout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .checkout input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+        }
+
+        .checkout button {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #27ae60;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkout button:hover {
+            background: #2ecc71;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards, fadeOut 2.5s forwards 2.5s;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mustafa Al-Kreiti Store</h1>
+        </div>
+
+        <div id="services">
+            <div class="card">
+                <div>
+                    <h3 class="card-title">نتفلكس (Netflix)</h3>
+                    <p class="price">الاشتراك العادي: 2.0 دولار شهريًا</p>
+                    <p class="price">اشتراك 4K: 3.0 دولار شهريًا</p>
+                </div>
+                <div class="actions">
+                    <button onclick="addToCart('نتفلكس (عادي)', 2)">إضافة العادي</button>
+                    <button onclick="addToCart('نتفلكس (4K)', 3)">إضافة 4K</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3 class="card-title">يوتيوب بريميوم (YouTube Premium)</h3>
+                    <p class="price">3.0 دولار شهريًا</p>
+                </div>
+                <div class="actions">
+                    <button onclick="addToCart('يوتيوب بريميوم', 3)">إضافة</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3 class="card-title">شاهد (Shahid)</h3>
+                    <p class="price">7.0 دولار شهريًا</p>
+                </div>
+                <div class="actions">
+                    <button onclick="addToCart('شاهد', 7)">إضافة</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3 class="card-title">خدمات الجات</h3>
+                    <p class="price">من 3.0 إلى 8.0 دولار شهريًا</p>
+                </div>
+                <div class="actions">
+                    <button onclick="addToCart('خدمات الجات', 5)">إضافة</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3 class="card-title">تطبيقات أخرى وكتب إلكترونية</h3>
+                    <p class="price">تتوفر بأسعار تنافسية تناسب الجميع</p>
+                </div>
+                <div class="actions">
+                    <button onclick="addToCart('تطبيقات أخرى', 10)">إضافة</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="total" id="total">الإجمالي: 0.00 دولار</div>
+
+        <div class="checkout">
+            <input type="email" id="email" placeholder="أدخل بريد الخدمة الإلكتروني للتفعيل">
+            <button onclick="sendToTelegram()">إرسال عبر التليجرام</button>
+            <button onclick="sendToFacebook()">إرسال عبر الفيس بوك</button>
+        </div>
+    </div>
+
+    <script>
+        let total = 0;
+
+        function showToast(message) {
+            let toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.innerText = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function addToCart(service, price) {
+            total += price;
+            document.getElementById('total').innerText = `الإجمالي: ${total.toFixed(2)} دولار`;
+            showToast(`${service} تمت إضافته للسلة!`);
+        }
+
+        function sendToTelegram() {
+            const email = document.getElementById('email').value;
+            if (email) {
+                const message = `تم إرسال طلب من العميل:\nبريد الخدمة الإلكتروني: ${email}\nالإجمالي: ${total.toFixed(2)} دولار`;
+                window.location.href = `https://t.me/your_telegram_bot?text=${encodeURIComponent(message)}`;
+            } else {
+                alert("يرجى إدخال بريد الخدمة الإلكتروني.");
+            }
+        }
+
+        function sendToFacebook() {
+            const email = document.getElementById('email').value;
+            if (email) {
+                const message = `تم إرسال طلب من العميل:\nبريد الخدمة الإلكتروني: ${email}\nالإجمالي: ${total.toFixed(2)} دولار`;
+                window.location.href = `https://www.facebook.com/messages/t/your_page_name?text=${encodeURIComponent(message)}`;
+            } else {
+                alert("يرجى إدخال بريد الخدمة الإلكتروني.");
+            }
+        }
+    </script>
+</body>
+</html>
